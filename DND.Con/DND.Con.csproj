@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F11B766-39A6-4AD5-B8FB-95E0787CB4A3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DND</RootNamespace>
-    <AssemblyName>DND</AssemblyName>
+    <ProjectGuid>{97D15579-8C38-4D61-93D1-223D914184F6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DND.Con</RootNamespace>
+    <AssemblyName>DND.Con</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,44 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\IDataAccess.cs" />
-    <Compile Include="Default\CardNameResolver.cs" />
-    <Compile Include="Default\SoftLinkProvider.cs" />
-    <Compile Include="Domain\CardSpace.cs" />
-    <Compile Include="Domain\DomainObject.cs" />
-    <Compile Include="Domain\Image.cs" />
-    <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\PropertyType.cs" />
-    <Compile Include="ISoftLinkProvider.cs" />
-    <Compile Include="Parser\ILiveParser.cs" />
-    <Compile Include="Parser\LiveParser.cs" />
-    <Compile Include="Parser\TokenCollectionChanges.cs" />
-    <Compile Include="Domain\Card.cs" />
-    <Compile Include="Default\CardLinker.cs" />
-    <Compile Include="Domain\CardType.cs" />
-    <Compile Include="Domain\Category.cs" />
-    <Compile Include="ICardLinker.cs" />
-    <Compile Include="ICardNameResolver.cs" />
-    <Compile Include="ICardProvider.cs" />
-    <Compile Include="Parser\ITokenParser.cs" />
-    <Compile Include="Default\LinkToken.cs" />
-    <Compile Include="Default\LinkTokenType.cs" />
-    <Compile Include="Parser\Token.cs" />
-    <Compile Include="Domain\HardLink.cs" />
-    <Compile Include="Domain\ILink.cs" />
-    <Compile Include="Domain\INamed.cs" />
-    <Compile Include="Domain\Map.cs" />
-    <Compile Include="Parser\TokenParser.cs" />
-    <Compile Include="Parser\TokenType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\SoftLink.cs" />
-    <Compile Include="Domain\Timeline.cs" />
-    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cashew.Data\Cashew.Data.csproj">
-      <Project>{c89d4f81-eff8-4114-ab16-4eed9d95ad57}</Project>
-      <Name>Cashew.Data</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cashew.Math\Cashew.Math.csproj">
+      <Project>{d96190ef-ea26-4eac-a8a3-8578f787cb5c}</Project>
+      <Name>Cashew.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cashew.UI\Cashew.UI.csproj">
+      <Project>{88f86612-72a6-45c1-ad88-5183e9c45bc8}</Project>
+      <Name>Cashew.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

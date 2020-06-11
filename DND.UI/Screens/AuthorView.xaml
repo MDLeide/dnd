@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="DND.UI.Screens.AuthorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DND.UI.Screens"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:card="clr-namespace:DND.UI.Domain.Card"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ToolBarTray Grid.Row="0">
+            <ToolBar>
+                <Button x:Name="ShowSearch" Click="ShowSearch_OnClick">
+                    <Image Source="../Resources/Images/search.png" Height="16"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Canvas x:Name="Canvas" Grid.Row="1" ClipToBounds="True">
+            <TabControl x:Name="Cards" Height="{Binding ElementName=Canvas, Path=ActualHeight}" Width="{Binding ElementName=Canvas, Path=ActualWidth}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <card:AuthorView/>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+            </TabControl>
+
+            <ContentControl x:Name="SelectedCard" cal:View.Context="AuthorView" 
+                            Canvas.Top="0" Canvas.Left="0"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+            <Grid x:Name="SearchGrid"
+                  Height="{Binding ElementName=Canvas, Path=ActualHeight}" Width="200"
+                  Canvas.Top="0" Canvas.Left="-200">
+                <ContentControl x:Name="CardSearch" cal:View.Context="SidePanelView" Margin="5,15"/>
+            </Grid>
+        </Canvas>
+    </Grid>
+</UserControl>

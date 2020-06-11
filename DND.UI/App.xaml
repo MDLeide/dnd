@@ -1,0 +1,51 @@
+﻿<Application x:Class="DND.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DND.UI"
+             xmlns:settings="clr-namespace:DND.UI.Controls.Settings">
+    <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary>
+                     <local:Bootstrapper x:Key="bootstrapper"/>
+                 </ResourceDictionary>
+
+                 <ResourceDictionary Source="Resources/Default.xaml"/>
+                 <ResourceDictionary Source="Resources/Brushes.xaml"/>
+             </ResourceDictionary.MergedDictionaries>
+
+             <Style TargetType="settings:SettingView">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="settings:SettingView">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type settings:SettingView}}, Path=SettingName}"
+                                           Margin="10,0"/>
+                                <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                      Y1="0" Y2="0" 
+                                      Margin="5"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      Grid.Row="1"
+                                      StrokeThickness="1"
+                                      Stroke="{DynamicResource GraphiteBrush}"
+                                      Fill="{DynamicResource GraphiteBrush}"/>
+                                <ContentControl Grid.Row="2" Grid.Column="1" Content="{TemplateBinding Content}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

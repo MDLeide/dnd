@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="DND.UI.Domain.Card.IndexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:converters="clr-namespace:DND.UI.Converters"
+             xmlns:design="clr-namespace:DND.UI.Design"
+             xmlns:ui="clr-namespace:DND.UI"
+             xmlns:converters1="clr-namespace:Cashew.UI.WPF.Converters;assembly=Cashew.UI.WPF"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=design:DesignCardViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Components.xaml"/>
+                <ResourceDictionary Source="../../Resources/Text.xaml"/>
+                <ResourceDictionary Source="../../Resources/Design.xaml"/>
+                <ResourceDictionary Source="../../Resources/Brushes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <ui:Bootstrapper x:Key="bs"/>
+            <converters:IndexCardControlDimensionConverter x:Key="DimensionConverter"/>
+            <converters1:BorderClipConverter x:Key="BorderClipConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.Width>
+        <MultiBinding Converter="{StaticResource DimensionConverter}" ConverterParameter="False">
+            <Binding Source="{StaticResource IndexCardWidth}"/>
+            <Binding Source="{StaticResource IndexCardImageDiameter}"/>
+            <Binding Source="{StaticResource Zero}"/>
+            <Binding Source="{StaticResource IndexCardImageXOffset}"/>
+        </MultiBinding>
+    </UserControl.Width>
+
+    <UserControl.Height>
+        <MultiBinding Converter="{StaticResource DimensionConverter}" ConverterParameter="True">
+            <Binding Source="{StaticResource IndexCardHeight}"/>
+            <Binding Source="{StaticResource IndexCardImageDiameter}"/>
+            <Binding Source="{StaticResource Zero}"/>
+            <Binding Source="{StaticResource IndexCardImageYOffset}"/>
+        </MultiBinding>
+    </UserControl.Height>
+
+    <UserControl.Effect>
+        <DropShadowEffect/>
+    </UserControl.Effect>
+    
+    <Canvas>
+        <!-- card -->
+        <Border BorderThickness="1" BorderBrush="{DynamicResource IndexCardBorderBrush}"
+                Background="{DynamicResource IndexCardBackgroundBrush}"
+                Height="{DynamicResource IndexCardHeight}" Width="{DynamicResource IndexCardWidth}"
+                Canvas.Left="0" Canvas.Bottom="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- title -->
+                <TextBlock Text="{Binding Title}"
+                           Style="{DynamicResource TitleTextBlockStyle}"
+                           VerticalAlignment="Bottom"
+                           Margin="5,0,0,0"
+                           Grid.Row="0" Grid.Column="0"/>
+
+                <!-- subtitle -->
+                <TextBlock Text="{Binding Subtitle}"
+                           Style="{DynamicResource SubtitleTextBlockStyle}"
+                           VerticalAlignment="Top"
+                           Margin="15,0,0,0"
+                           Grid.Row="1" Grid.Column="0"/>
+
+                <!-- linked text -->
+                <ContentControl cal:View.Model="{Binding LinkedText}"
+                                cal:View.Context="DisplayView"
+                                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                Margin="15"/>
+
+                <!-- card type -->
+                <ContentControl cal:View.Model="{Binding CardType}"
+                                cal:View.Context="CompactView" 
+                                HorizontalAlignment="Right"
+                                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                Margin="0,0,20,2"/>
+            </Grid>
+        </Border>
+
+        <!-- image -->
+        <Border x:Name="ImageBorder"
+                Canvas.Right="0" Canvas.Top="0"
+                Margin="1,1,3,3"
+                Height="{DynamicResource IndexCardImageDiameter}"
+                Background="{DynamicResource ImageBackgroundBrush}"
+                BorderBrush="{DynamicResource BronzeBrush}" BorderThickness="1"
+                CornerRadius="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                VerticalAlignment="Stretch">
+            <Border.Clip>
+                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                    <Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth"/>
+                    <Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+                    <Binding RelativeSource="{RelativeSource Self}" Path="CornerRadius"/>
+                </MultiBinding>
+            </Border.Clip>
+
+            <Image Source="{Binding PrimaryImage.Source, FallbackValue={StaticResource DefaultImage}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Image.ToolTip>
+                    <TextBlock>
+                        <TextBlock.Inlines>
+                            <Run Text="{Binding PrimaryImage.Name}"/>
+                            <Run Text="{Binding PrimaryImage.Location}" FontStyle="Italic" FontWeight="Light"/>
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                </Image.ToolTip>
+            </Image>
+        </Border>
+    </Canvas>
+</UserControl>

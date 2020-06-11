@@ -1,0 +1,59 @@
+﻿#Cards
+
+int Id {pk}
+varchar Title
+varchar Description
+int CardTypeId {fk:CardTypes.Id}
+varchar PrimaryImageLocation
+varchar RawText
+
+
+#CardTypes
+
+int Id {pk}
+varchar Description
+varchar ImageLocation
+
+
+#CardImages
+
+int Id {pk}
+int CardId {fk:Cards.Id}
+varchar ImageLocation
+
+
+#CardTypeImages
+
+int Id {pk}
+int CardTypeId {fk:CardTypes.Id}
+varchar ImageLocation
+
+
+#HardLinks
+
+int Id {pk}
+int OriginId {fk:Cards.Id}
+int TargetId {fk:Cards.Id}
+bit Mutual
+
+
+#PropertyTypes
+
+int Id {pk}
+varchar Name
+varchar Description
+
+
+#PropertyTypeCardTypes
+
+int Id {pk}
+int PropertyTypeId {fk:PropertyTypes.Id}
+int CardTypeID {fk:CardTypes.Id}
+
+
+#Properties
+
+int Id {pk}
+int PropertyTypeId {fk:PropertyTypes.Id}
+int CardId {fk:Cards.Id}
+varchar Value

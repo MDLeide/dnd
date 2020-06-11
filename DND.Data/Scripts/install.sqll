@@ -1,0 +1,188 @@
+DROP TABLE IF EXISTS VisualStates;
+DROP TABLE IF EXISTS EnumVisualStates;
+
+DROP TABLE IF EXISTS CardSpaceCards;
+
+DROP TABLE IF EXISTS CardSpaces;
+
+DROP TABLE IF EXISTS CardTypes;
+
+DROP TABLE IF EXISTS Cards;
+
+DROP TABLE IF EXISTS CardImages;
+
+DROP TABLE IF EXISTS HardLinks;
+
+DROP TABLE IF EXISTS Properties;
+
+DROP TABLE IF EXISTS PropertyTypeCardTypes;
+
+DROP TABLE IF EXISTS PropertyTypes;
+
+DROP TABLE IF EXISTS Images;
+
+CREATE TABLE IF NOT EXISTS Images (
+    Id          INTEGER PRIMARY KEY,
+    Location    VARCHAR NOT NULL,
+    Name        VARCHAR,
+    Description VARCHAR,
+    Size        INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS CardTypes (
+    Id            INTEGER PRIMARY KEY,
+    Name          VARCHAR NOT NULL
+                          UNIQUE,
+    Description   VARCHAR,
+    ImageId INT     REFERENCES Images,
+    FOREIGN KEY (
+        ImageId
+    )
+    REFERENCES Images (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS Cards (
+    Id             INTEGER PRIMARY KEY,
+    Title          VARCHAR UNIQUE,
+	Subtitle       VARCHAR,
+    Description    VARCHAR,
+    RawText        VARCHAR,
+    CardTypeId     INTEGER NOT NULL
+                           REFERENCES CardTypes,
+    PrimaryImageId INT     REFERENCES Images,
+    FOREIGN KEY (
+        CardTypeId
+    )
+    REFERENCES CardTypes (Id),
+    FOREIGN KEY (
+        PrimaryImageId
+    )
+    REFERENCES Images (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS CardImages (
+    Id      INTEGER PRIMARY KEY,
+    CardId  INTEGER NOT NULL
+                    REFERENCES Cards,
+    ImageId INTEGER NOT NULL
+                    REFERENCES Images,
+    FOREIGN KEY (
+        CardId
+    )
+    REFERENCES Cards (Id),
+    FOREIGN KEY (
+        ImageId
+    )
+    REFERENCES Images (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS HardLinks (
+    Id       INTEGER PRIMARY KEY,
+    OriginId INTEGER NOT NULL
+                     REFERENCES Cards,
+    TargetId INTEGER NOT NULL
+                     REFERENCES Cards,
+    Mutual   BIT     NOT NULL,
+    FOREIGN KEY (
+        OriginId
+    )
+    REFERENCES Cards (Id),
+    FOREIGN KEY (
+        TargetId
+    )
+    REFERENCES Cards (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS PropertyTypes (
+    Id          INTEGER PRIMARY KEY,
+    Name        VARCHAR NOT NULL
+                        UNIQUE,
+    Description VARCHAR
+);
+
+CREATE TABLE IF NOT EXISTS PropertyTypeCardTypes (
+    Id             INTEGER PRIMARY KEY,
+    PropertyTypeId INTEGER NOT NULL
+                           REFERENCES PropertyTypes,
+    CardTypeId     INTEGER NOT NULL
+                           REFERENCES CardTypes,
+    FOREIGN KEY (
+        PropertyTypeId
+    )
+    REFERENCES PropertyTypes (Id),
+    FOREIGN KEY (
+        CardTypeId
+    )
+    REFERENCES CardTypes (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS Properties (
+    Id             INTEGER PRIMARY KEY,
+    PropertyTypeId INTEGER NOT NULL
+                           REFERENCES PropertyTypes,
+    CardId         INTEGER NOT NULL
+                           REFERENCES Cards,
+    Value          VARCHAR,
+    FOREIGN KEY (
+        PropertyTypeId
+    )
+    REFERENCES PropertyTypes (Id),
+    FOREIGN KEY (
+        CardId
+    )
+    REFERENCES Cards (Id) 
+);
+
+CREATE TABLE IF NOT EXISTS EnumVisualStates (
+    Id   INTEGER PRIMARY KEY,
+    Name VARCHAR
+);
+
+INSERT INTO VisualStates (Id, Name) VALUES (0, "Visible");
+INSERT INTO VisualStates (Id, Name) VALUES (1, "Collapsed");
+INSERT INTO VisualStates (Id, Name) VALUES (2, "ImageOnly");
+INSERT INTO VisualStates (Id, Name) VALUES (3, "Minimized");
+INSERT INTO VisualStates (Id, Name) VALUES (4, "Hidden");
+
+CREATE TABLE IF NOT EXISTS CardSpaceCards (
+--    Id            INTEGER,
+    Id            INTEGER PRIMARY KEY,
+    CardId        INTEGER NOT NULL
+                          REFERENCES Cards,
+    CardSpaceId   INTEGER NOT NULL
+                          REFERENCES CardSpaces,
+    PositionLeft  FLOAT   NOT NULL,
+    PositionTop   FLOAT   NOT NULL,
+	ZIndex		  INTEGER NOT NULL,
+    VisualStateId INTEGER NOT NULL
+                          REFERENCES EnumVisualStates,
+    FOREIGN KEY (
+        CardId
+    )
+    REFERENCES Cards (Id),
+    FOREIGN KEY (
+        CardSpaceId
+    )
+    REFERENCES CardSpaces (Id),
+    FOREIGN KEY (
+        VisualStateId
+    )
+    REFERENCES VisualStates (Id)
+--    ,PRIMARY KEY (
+--        CardId,
+--        CardSpaceId
+--    )
+);
+
+CREATE TABLE IF NOT EXISTS CardSpaces (
+    Id                INTEGER PRIMARY KEY,
+    Name              VARCHAR UNIQUE
+                              NOT NULL,
+    Description       VARCHAR,
+    BackgroundColor   VARCHAR,
+    BackgroundImageId INTEGER REFERENCES Images,
+    FOREIGN KEY (
+        BackgroundImageId
+    )
+    REFERENCES Images (Id) 
+);

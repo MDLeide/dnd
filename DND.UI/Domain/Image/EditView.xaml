@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="DND.UI.Domain.Image.EditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DND.UI.Domain.Image"
+             xmlns:controls="clr-namespace:DND.UI.Controls"
+             xmlns:settings="clr-namespace:DND.UI.Controls.Settings"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+            <settings:StringSettingView SettingName="Name" Value="{Binding Name, Mode=TwoWay}"/>
+            <settings:StringSettingView SettingName="Description" Value="{Binding Description, Mode=TwoWay}"/>
+            <settings:SettingView SettingName="Image">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Name}"/>
+                    <Image Grid.Row="1" Source="{Binding Source}" Height="200"/>
+                    <TextBlock Grid.Row="2" Text="{Binding Location}" FontWeight="Light" FontStyle="Italic"/>
+                    <Button x:Name="ChangeLocation" Grid.Row="3" Content="Change Image" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </settings:SettingView>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="DND.UI.Domain.Card.CompactView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DND.UI.Domain.Card"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:converters="clr-namespace:Cashew.UI.WPF.Converters;assembly=Cashew.UI.WPF"
+             mc:Ignorable="d" 
+             Height="50"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Text.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:StringConverter x:Key="CardTypeNameConverter" ToLower="True" StartingText="{}{" EndingText="}"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13"/>
+            <RowDefinition/>
+            <RowDefinition Height="13"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding PrimaryImage.Source}"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
+            <TextBlock Text="{Binding Title}" Style="{DynamicResource CompactTitleTextBlockStyle}"/>
+            <TextBlock Text="{Binding Subtitle}" Style="{DynamicResource CompactSubtitleTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,15,0"/>
+        </StackPanel>
+
+        <Image Source="{Binding CardType.Image.Source}" Grid.Row="1" Grid.Column="2"/>
+        <TextBlock Text="{Binding CardType.Name, Converter={StaticResource CardTypeNameConverter}}"
+                   Style="{DynamicResource CompactTitleTextBlockStyle}"
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
+                   Grid.Row="2" Grid.Column="2"/>
+    </Grid>
+
+    <!--<StackPanel Orientation="Horizontal">
+        <Image Source="{Binding PrimaryImage.Source}"/>
+
+        <StackPanel Margin="5,0,0,0">
+            <TextBlock Text="{Binding Title}" Style="{DynamicResource CompactTitleTextBlockStyle}"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Subtitle}" Style="{DynamicResource CompactSubtitleTextBlockStyle}"/>
+                
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>-->
+</UserControl>

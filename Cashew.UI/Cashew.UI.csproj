@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F11B766-39A6-4AD5-B8FB-95E0787CB4A3}</ProjectGuid>
+    <ProjectGuid>{88F86612-72A6-45C1-AD88-5183E9C45BC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DND</RootNamespace>
-    <AssemblyName>DND</AssemblyName>
+    <RootNamespace>Cashew.UI</RootNamespace>
+    <AssemblyName>Cashew.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,45 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\IDataAccess.cs" />
-    <Compile Include="Default\CardNameResolver.cs" />
-    <Compile Include="Default\SoftLinkProvider.cs" />
-    <Compile Include="Domain\CardSpace.cs" />
-    <Compile Include="Domain\DomainObject.cs" />
-    <Compile Include="Domain\Image.cs" />
-    <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\PropertyType.cs" />
-    <Compile Include="ISoftLinkProvider.cs" />
-    <Compile Include="Parser\ILiveParser.cs" />
-    <Compile Include="Parser\LiveParser.cs" />
-    <Compile Include="Parser\TokenCollectionChanges.cs" />
-    <Compile Include="Domain\Card.cs" />
-    <Compile Include="Default\CardLinker.cs" />
-    <Compile Include="Domain\CardType.cs" />
-    <Compile Include="Domain\Category.cs" />
-    <Compile Include="ICardLinker.cs" />
-    <Compile Include="ICardNameResolver.cs" />
-    <Compile Include="ICardProvider.cs" />
-    <Compile Include="Parser\ITokenParser.cs" />
-    <Compile Include="Default\LinkToken.cs" />
-    <Compile Include="Default\LinkTokenType.cs" />
-    <Compile Include="Parser\Token.cs" />
-    <Compile Include="Domain\HardLink.cs" />
-    <Compile Include="Domain\ILink.cs" />
-    <Compile Include="Domain\INamed.cs" />
-    <Compile Include="Domain\Map.cs" />
-    <Compile Include="Parser\TokenParser.cs" />
-    <Compile Include="Parser\TokenType.cs" />
+    <Compile Include="LorumIpsum.cs" />
+    <Compile Include="LorumIpsumGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\SoftLink.cs" />
-    <Compile Include="Domain\Timeline.cs" />
-    <Compile Include="Resources.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cashew.Data\Cashew.Data.csproj">
-      <Project>{c89d4f81-eff8-4114-ab16-4eed9d95ad57}</Project>
-      <Name>Cashew.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

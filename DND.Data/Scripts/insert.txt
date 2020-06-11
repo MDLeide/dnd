@@ -1,0 +1,108 @@
+INSERT INTO CardTypes (
+                          Name,
+                          Description,
+                          ImageId
+                      )
+                      VALUES (
+                          'Monster',
+                          'A card that represents a monster',
+                          null
+                      );
+
+INSERT INTO CardTypes (
+                          Name,
+                          Description,
+                          ImageId
+                      )
+                      VALUES (
+                          'Player Character',
+                          'A card that represents a player character',
+                          null
+                      );
+
+INSERT INTO CardTypes (
+                          Name,
+                          Description,
+                          ImageId
+                      )
+                      VALUES (
+                          'Magic Item',
+                          'A card that represents a magic item',
+                          null
+                      );
+
+INSERT INTO PropertyTypes (
+                              Name,
+                              Description
+                          )
+                          VALUES (
+                              'HP',
+                              'Maximum hit points'
+                          );
+                          
+INSERT INTO PropertyTypes (
+                              Name,
+                              Description
+                          )
+                          VALUES (
+                              'Strength',
+                              'Strength ability score'
+                          );
+                          
+INSERT INTO PropertyTypes (
+                              Name,
+                              Description
+                          )
+                          VALUES (
+                              'Dexterity',
+                              'Dexterity ability score'
+                          );
+
+INSERT INTO Images (
+                       Location,
+                       Name,
+                       Description,
+                       Size
+                   )
+                   VALUES (
+                       '\test\location\file.png',
+                       'Test One',
+                       'Test One Description',
+                       0
+                   );
+                   
+INSERT INTO Images (
+                       Location,
+                       Name,
+                       Description,
+                       Size
+                   )
+                   VALUES (
+                       '\test\location\file2.png',
+                       'Test Two',
+                       'Test Two Description',
+                       0
+                   );
+                   
+INSERT INTO Images (
+                       Location,
+                       Name,
+                       Description,
+                       Size
+                   )
+                   VALUES (
+                       '\test\location\file3.png',
+                       'Test Three',
+                       'Test Three Description',
+                       0
+                   );
+
+INSERT INTO CardImages (
+                           CardId,
+                           ImageId
+                       )
+                       VALUES (
+                           'CardId',
+                           'ImageId'
+                       );
+

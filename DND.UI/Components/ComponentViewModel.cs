@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DND
+namespace DND.UI.Components
 {
-    public class Class1
+    class ComponentViewModel
     {
     }
 }
